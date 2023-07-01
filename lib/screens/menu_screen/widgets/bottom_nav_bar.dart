@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class MainBottomNavBar extends StatelessWidget {
@@ -15,7 +14,7 @@ class MainBottomNavBar extends StatelessWidget {
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.search),
+          icon: Icon(Icons.search), 
           label: 'Search',
         ),
         BottomNavigationBarItem(
@@ -24,6 +23,8 @@ class MainBottomNavBar extends StatelessWidget {
         ),
       ],
       currentIndex: 1,
+      elevation: 50,
+      showUnselectedLabels: true,
       selectedItemColor: Colors.blue,
       onTap: (index) {},
     );

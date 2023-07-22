@@ -11,98 +11,122 @@ class DummyDataGenerator {
       "products": [
         {
           "id": 1,
-          "title": "تفاح",
+          "title_ar": "تفاح",
+          "title": "Apple",
           "image_url": "https://example.com/apple.jpg"
         },
         {
           "id": 2,
-          "title": "بندورة",
+          "title_ar": "بندورة",
+          "title": "Tomato",
           "image_url": "https://example.com/tomato.jpg"
         },
         {
           "id": 3,
-          "title": "برتقال",
+          "title_ar": "برتقال",
+          "title": "Orange",
           "image_url": "https://example.com/orange.jpg"
         },
         {
           "id": 4,
-          "title": "جزر",
+          "title_ar": "جزر",
+          "title": "Carrot",
           "image_url": "https://example.com/carrot.jpg"
         },
         {
           "id": 5,
-          "title": "موز",
+          "title_ar": "موز",
+          "title": "Banana",
           "image_url": "https://example.com/banana.jpg"
         },
         {
           "id": 6,
-          "title": "خيار",
+          "title_ar": "خيار",
+          "title": "Cucumber",
           "image_url": "https://example.com/cucumber.jpg"
         },
         {
           "id": 7,
-          "title": "ليمون",
+          "title_ar": "ليمون",
+          "title": "Lemon",
           "image_url": "https://example.com/lemon.jpg"
         },
         {
           "id": 8,
-          "title": "فراولة",
+          "title_ar": "فراولة",
+          "title": "Strawberry",
           "image_url": "https://example.com/strawberry.jpg"
         },
         {
           "id": 9,
-          "title": "بطاطس",
+          "title_ar": "بطاطس",
+          "title": "Potato",
           "image_url": "https://example.com/potato.jpg"
         },
         {
           "id": 10,
-          "title": "خوخ",
+          "title_ar": "خوخ",
+          "title": "Peach",
           "image_url": "https://example.com/peach.jpg"
         },
         {
           "id": 11,
-          "title": "باذنجان",
+          "title_ar": "باذنجان",
+          "title": "Eggplant",
           "image_url": "https://example.com/eggplant.jpg"
         },
         {
           "id": 12,
-          "title": "كرز",
+          "title_ar": "كرز",
+          "title": "Cherry",
           "image_url": "https://example.com/cherry.jpg"
         },
         {
           "id": 13,
-          "title": "بصل",
+          "title_ar": "بصل",
+          "title": "Onion",
           "image_url": "https://example.com/onion.jpg"
         },
         {
           "id": 14,
-          "title": "عنب",
+          "title_ar": "عنب",
+          "title": "Grape",
           "image_url": "https://example.com/grape.jpg"
         },
         {
           "id": 15,
-          "title": "فلفل أحمر",
+          "title_ar": "فلفل أحمر",
+          "title": "Red Pepper",
           "image_url": "https://example.com/red_pepper.jpg"
         },
         {
           "id": 16,
-          "title": "ملفوف",
+          "title_ar": "ملفوف",
+          "title": "Cabbage",
           "image_url": "https://example.com/cabbage.jpg"
         },
-        {"id": 17, "title": "تين", "image_url": "https://example.com/fig.jpg"},
+        {
+          "id": 17,
+          "title_ar": "تين",
+          "title": "Fig",
+          "image_url": "https://example.com/fig.jpg"
+        },
         {
           "id": 18,
-          "title": "بطيخ",
+          "title_ar": "بطيخ",
+          "title": "Watermelon",
           "image_url": "https://example.com/watermelon.jpg"
         },
         {
           "id": 19,
-          "title": "كيوي",
+          "title_ar": "كيوي",
+          "title": "Kiwi",
           "image_url": "https://example.com/kiwi.jpg"
         },
         {
           "id": 20,
-          "title": "بازلاء",
+          "title_ar": "بازلاء",
+          "title": "Peas",
           "image_url": "https://example.com/peas.jpg"
         }
       ]

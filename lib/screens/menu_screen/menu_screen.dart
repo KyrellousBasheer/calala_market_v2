@@ -1,6 +1,7 @@
 import 'package:calala_market/screens/menu_screen/widgets/search_bar.dart';
 import 'package:calala_market/services/dummy_data_generator.dart';
 import 'package:calala_market/services/models/category.dart';
+import 'package:calala_market/services/models/product.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/bottom_nav_bar.dart';
@@ -11,18 +12,20 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-        child: Column(
-          children: const [
-            SearchField(),
-            SizedBox(height: 10),
-            _CategoriesAndProducts(),
-          ],
+    return const SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+          child: Column(
+            children: [
+              SearchField(),
+              SizedBox(height: 10),
+              _CategoriesAndProducts(),
+            ],
+          ),
         ),
+        bottomNavigationBar: MainBottomNavBar(),
       ),
-      bottomNavigationBar: const MainBottomNavBar(),
     );
   }
 }
@@ -64,7 +67,7 @@ class _CustomTabView extends StatelessWidget {
             TabBar(
               isScrollable: true,
               tabs: categories.map((c) => Tab(text: c.title)).toList(),
-              // labelColor: Colors.black87,
+              labelColor: Colors.black87,
             ),
             Expanded(
               child: TabBarView(
@@ -88,23 +91,89 @@ class ProductsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: GridView.builder(
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 1 / 1.4,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 20),
         itemCount: category.relatedProducts.length,
-        itemBuilder: (context, index) => SizedBox(
-          child: Container(
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(15)),
-                border: Border.all(
-                  // color: Colors.black,
-                  width: 1.5,
-                ),
-              ),
-              margin: const EdgeInsets.all(5),
-              alignment: Alignment.center,
-              child: Text(category.relatedProducts[index].title)),
-        ),
+        itemBuilder: (context, index) =>
+            ProductWidget(product: category.relatedProducts[index]),
       ),
     );
+  }
+}
+
+class ProductWidget extends StatelessWidget {
+  const ProductWidget({
+    super.key,
+    required this.product,
+  });
+
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(7)),
+          border: Border.all(
+            color: const Color.fromARGB(81, 76, 175, 79),
+            width: 1.5,
+          ),
+        ),
+        margin: const EdgeInsets.all(5),
+        alignment: Alignment.center,
+        child: Column(
+          children: [
+            Expanded(
+              flex: 5,
+              child: Stack(children: [
+                Image.network(
+                    "https://png.pngtree.com/element_our/20200702/ourmid/pngtree-flat-colorful-cartoon-style-supermarket-shopping-mall-grocery-shopping-basket-image_2291870.jpg"),
+              ]),
+            ),
+            const Expanded(
+              flex: 1,
+              child: Text(
+                "\$39.5",
+                style: TextStyle(
+                    color: Color.fromARGB(229, 76, 175, 79),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Text(
+                product.title,
+                style: const TextStyle(
+                    color: Colors.black54,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w900),
+              ),
+            ),
+            const Center(
+              child: Expanded(
+                flex: 1,
+                child: Text("Each"),
+              ),
+            ),
+            const Divider(
+              color: Color.fromARGB(81, 76, 175, 79),
+              thickness: 2,
+            ),
+            const Expanded(
+              flex: 1,
+              child: Text(
+                "Add to Cart",
+                style: TextStyle(
+                    color: Color.fromARGB(229, 76, 175, 79),
+                    fontSize: 17,
+                    fontWeight: FontWeight.w900),
+              ),
+            ),
+          ],
+        ));
   }
 }

@@ -2,32 +2,41 @@ import 'package:calala_market/screens/menu_screen/widgets/search_bar.dart';
 import 'package:calala_market/services/dummy_data_generator.dart';
 import 'package:calala_market/services/models/category.dart';
 import 'package:calala_market/services/models/product.dart';
+import 'package:calala_market/shared_widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/bottom_nav_bar.dart';
 
 class MenuScreen extends StatelessWidget {
   static const String routeName = "menu-screen";
-  const MenuScreen({super.key});
+  MenuScreen({super.key});
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        key: _scaffoldKey,
+        drawer: const MainDrawer(),
         appBar: AppBar(
           leading: Padding(
               padding: const EdgeInsets.only(left: 9.0),
-              child: Container(
-                width: 150,
-                height: 150,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: const Color.fromARGB(229, 76, 175, 79),
-                    width: 2,
-                  ),
-                  image: const DecorationImage(
-                    image: NetworkImage(profileImageUrl),
+              child: GestureDetector(
+                onTap: () {
+                  _scaffoldKey.currentState?.openDrawer();
+                },
+                child: Container(
+                  width: 150,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: const Color.fromARGB(229, 76, 175, 79),
+                      width: 2,
+                    ),
+                    image: const DecorationImage(
+                      image: NetworkImage(profileImageUrl),
+                    ),
                   ),
                 ),
               )),

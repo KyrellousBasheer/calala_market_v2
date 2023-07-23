@@ -109,9 +109,6 @@ class ProductWidget extends StatelessWidget {
   }) : super(key: key);
 
   final Product product;
-  final String imageUrl =
-      "https://w7.pngwing.com/pngs/1007/189/png-transparent-grocery-store-supermarket-shopping-list-food-restaurant-supermarket-vegetables-natural-foods-service-retail-thumbnail.png";
-
   @override
   Widget build(BuildContext context) {
     return Container(

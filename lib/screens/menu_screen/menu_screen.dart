@@ -82,98 +82,93 @@ class _CustomTabView extends StatelessWidget {
   }
 }
 
-/// ## this view is to build the products screen for each category
 class ProductsView extends StatelessWidget {
   final ProductCategory category;
-  const ProductsView({super.key, required this.category});
+  const ProductsView({Key? key, required this.category}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 1 / 1.4,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 20),
-        itemCount: category.relatedProducts.length,
-        itemBuilder: (context, index) =>
-            ProductWidget(product: category.relatedProducts[index]),
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 1 / 1.4,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 20,
       ),
+      itemCount: category.relatedProducts.length,
+      itemBuilder: (context, index) =>
+          ProductWidget(product: category.relatedProducts[index]),
     );
   }
 }
 
 class ProductWidget extends StatelessWidget {
   const ProductWidget({
-    super.key,
+    Key? key,
     required this.product,
-  });
+  }) : super(key: key);
 
   final Product product;
+  final String imageUrl =
+      "https://w7.pngwing.com/pngs/1007/189/png-transparent-grocery-store-supermarket-shopping-list-food-restaurant-supermarket-vegetables-natural-foods-service-retail-thumbnail.png";
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(7)),
-          border: Border.all(
-            color: const Color.fromARGB(81, 76, 175, 79),
-            width: 1.5,
-          ),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(7)),
+        border: Border.all(
+          color: const Color.fromARGB(81, 76, 175, 79),
+          width: 1.5,
         ),
-        margin: const EdgeInsets.all(5),
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            Expanded(
-              flex: 5,
-              child: Stack(children: [
+      ),
+      margin: const EdgeInsets.all(5),
+      alignment: Alignment.center,
+      child: Column(
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.width /
+                2.8, // Adjust the height as needed
+            child: Stack(
+              children: [
                 Image.network(
-                    "https://png.pngtree.com/element_our/20200702/ourmid/pngtree-flat-colorful-cartoon-style-supermarket-shopping-mall-grocery-shopping-basket-image_2291870.jpg"),
-              ]),
+                  product.imageUrl,
+                  fit: BoxFit.cover,
+                )
+              ],
             ),
-            const Expanded(
-              flex: 1,
-              child: Text(
-                "\$39.5",
-                style: TextStyle(
-                    color: Color.fromARGB(229, 76, 175, 79),
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700),
-              ),
+          ),
+          const Text(
+            "\$39.5",
+            style: TextStyle(
+              color: Color.fromARGB(229, 76, 175, 79),
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
             ),
-            Expanded(
-              flex: 1,
-              child: Text(
-                product.title,
-                style: const TextStyle(
-                    color: Colors.black54,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w900),
-              ),
+          ),
+          Text(
+            product.title,
+            style: const TextStyle(
+              color: Colors.black54,
+              fontSize: 18,
+              fontWeight: FontWeight.w900,
             ),
-            const Center(
-              child: Expanded(
-                flex: 1,
-                child: Text("Each"),
-              ),
+          ),
+          const Text("Each"),
+          const Divider(
+            color: Color.fromARGB(81, 76, 175, 79),
+            thickness: 2,
+          ),
+          const Text(
+            "Add to Cart",
+            style: TextStyle(
+              color: Color.fromARGB(229, 76, 175, 79),
+              fontSize: 17,
+              fontWeight: FontWeight.w900,
             ),
-            const Divider(
-              color: Color.fromARGB(81, 76, 175, 79),
-              thickness: 2,
-            ),
-            const Expanded(
-              flex: 1,
-              child: Text(
-                "Add to Cart",
-                style: TextStyle(
-                    color: Color.fromARGB(229, 76, 175, 79),
-                    fontSize: 17,
-                    fontWeight: FontWeight.w900),
-              ),
-            ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }

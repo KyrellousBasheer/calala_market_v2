@@ -12,19 +12,53 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: Scaffold(
-        body: Padding(
+        appBar: AppBar(
+          leading: Padding(
+              padding: const EdgeInsets.only(left: 9.0),
+              child: Container(
+                width: 150,
+                height: 150,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: const Color.fromARGB(229, 76, 175, 79),
+                    width: 2,
+                  ),
+                  image: const DecorationImage(
+                    image: NetworkImage(profileImageUrl),
+                  ),
+                ),
+              )),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.shopping_cart,
+                  size: 30,
+                ),
+                color: Colors.black87,
+              ),
+            )
+          ],
+          title: const SearchField(),
+          backgroundColor: Colors.transparent,
+          toolbarHeight: MediaQuery.of(context).size.width / 6,
+          elevation: 0,
+        ),
+        body: const Padding(
           padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
           child: Column(
             children: [
-              SearchField(),
               SizedBox(height: 10),
               _CategoriesAndProducts(),
             ],
           ),
         ),
-        bottomNavigationBar: MainBottomNavBar(),
+        bottomNavigationBar: const MainBottomNavBar(),
       ),
     );
   }

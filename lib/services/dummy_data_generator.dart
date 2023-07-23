@@ -3,7 +3,7 @@ import 'package:calala_market/services/models/product.dart';
 import 'models/category.dart';
 
 const String profileImageUrl =
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-8SJZalEzsMbwlSZY4chR62sCdrrNcTYoKA&usqp=CAU";
+    "https://e7.pngegg.com/pngimages/550/997/png-clipart-user-icon-foreigners-avatar-child-face.png";
 
 const String placeholderImageUrl =
     "https://images.rawpixel.com/image_png_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvcHUyMzMzNDIyLWltYWdlLWpvYjYyMV8xLWt6cnJtcDB4LnBuZw.png?s=kB1Ggx6NJhyi9FX7UYTQxTZpzcN3HPtWqf1PkbVL6wk";

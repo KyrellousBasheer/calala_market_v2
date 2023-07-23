@@ -6,7 +6,12 @@ const String profileImageUrl =
     "https://e7.pngegg.com/pngimages/550/997/png-clipart-user-icon-foreigners-avatar-child-face.png";
 
 const String placeholderImageUrl =
-    "https://images.rawpixel.com/image_png_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvcHUyMzMzNDIyLWltYWdlLWpvYjYyMV8xLWt6cnJtcDB4LnBuZw.png?s=kB1Ggx6NJhyi9FX7UYTQxTZpzcN3HPtWqf1PkbVL6wk";
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJawkLLGQp4_LFali8lA9W7pHr2QShkSiI1a88zkEo09fgzhayqGVNFF4L8x2juBMz9aY&usqp=CAU";
+// const String placeholderImageUrl =
+//     "https://www.pngmart.com/files/7/Grocery-PNG-Transparent-Picture.png";
+
+const String defaultCategoryIconUrl =
+    "https://www.pngitem.com/pimgs/m/494-4943095_groceries-icon-everyday-icons-hd-png-download.png";
 
 class DummyDataGenerator {
   static List<dynamic> responseSample = [
@@ -502,12 +507,13 @@ class DummyDataGenerator {
   ];
 
   static Future<List<ProductCategory>?> getCategories() async {
-    await Future.delayed(const Duration(milliseconds: 5000));
+    await Future.delayed(const Duration(milliseconds: 500));
     var lst = responseSample
         .map(
           (obj) => ProductCategory(
             id: obj["id"],
             title: obj["title"],
+            iconUrl: defaultCategoryIconUrl,
             relatedProducts: (obj["products"] as List)
                 .map((pObj) => Product(
                       pObj["id"],

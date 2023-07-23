@@ -37,7 +37,7 @@ class MenuScreen extends StatelessWidget {
               child: IconButton(
                 onPressed: () {},
                 icon: const Icon(
-                  Icons.shopping_cart,
+                  Icons.shopping_cart_outlined,
                   size: 30,
                 ),
                 color: Colors.black87,
@@ -100,7 +100,14 @@ class _CustomTabView extends StatelessWidget {
           children: [
             TabBar(
               isScrollable: true,
-              tabs: categories.map((c) => Tab(text: c.title)).toList(),
+              tabs: categories
+                  .map((c) => Tab(
+                        text: c.title,
+                        icon: CircleAvatar(
+                          backgroundImage: NetworkImage(c.iconUrl),
+                        ),
+                      ))
+                  .toList(),
               labelColor: Colors.black87,
             ),
             Expanded(
@@ -165,7 +172,20 @@ class ProductWidget extends StatelessWidget {
                 Image.network(
                   product.imageUrl,
                   fit: BoxFit.cover,
-                )
+                ),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.favorite,
+                      // color: Colors.black54,
+                      color: Color.fromARGB(229, 76, 175, 79),
+                    ),
+                    alignment: Alignment.topRight,
+                  ),
+                ),
               ],
             ),
           ),

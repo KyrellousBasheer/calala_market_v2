@@ -107,17 +107,20 @@ class _CustomTabView extends StatelessWidget {
       child: Expanded(
         child: Column(
           children: [
-            TabBar(
-              isScrollable: true,
-              tabs: categories
-                  .map((c) => Tab(
-                        text: c.title,
-                        icon: CircleAvatar(
-                          backgroundImage: NetworkImage(c.iconUrl),
-                        ),
-                      ))
-                  .toList(),
-              labelColor: Colors.black87,
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10.0),
+              child: TabBar(
+                isScrollable: true,
+                tabs: categories
+                    .map((c) => Tab(
+                          text: c.title,
+                          icon: CircleAvatar(
+                            backgroundImage: NetworkImage(c.iconUrl),
+                          ),
+                        ))
+                    .toList(),
+                labelColor: Colors.black87,
+              ),
             ),
             Expanded(
               child: TabBarView(

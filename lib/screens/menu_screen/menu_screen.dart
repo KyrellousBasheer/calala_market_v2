@@ -183,7 +183,7 @@ class ProductWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            flex: 6,
+            flex: 50,
             child: Stack(
               children: [
                 Image.network(
@@ -206,6 +206,7 @@ class ProductWidget extends StatelessWidget {
             ),
           ),
           Expanded(
+            flex: 10,
             child: Text(
               product.title,
               style: const TextStyle(
@@ -216,9 +217,10 @@ class ProductWidget extends StatelessWidget {
             ),
           ),
           const Expanded(
+            flex: 10,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "\$39.5",
@@ -234,22 +236,38 @@ class ProductWidget extends StatelessWidget {
           ),
           const Divider(
             color: kMainColorTransparent,
+            height: 0,
             thickness: 2,
           ),
           Expanded(
-            flex: 1,
-            child: GestureDetector(
-              onTap: () {},
-              child: const Text(
-                "Add to Cart",
-                style: TextStyle(
-                  color: kMainColor,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-            ),
-          ),
+              flex: 10,
+              child: (addedToCart % 3 == 0)
+                  ? GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: const Text(
+                          "Add to Cart",
+                          style: TextStyle(
+                            color: kMainColor,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ),
+                    )
+                  : Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        const Icon(Icons.remove, color: kMainColor),
+                        const VerticalDivider(
+                            indent: 0, endIndent: 0, thickness: 2),
+                        Text("$addedToCart"),
+                        const VerticalDivider(thickness: 2),
+                        const Icon(Icons.add, color: kMainColor)
+                      ],
+                    )),
         ],
       ),
     );

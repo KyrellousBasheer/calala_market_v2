@@ -242,7 +242,7 @@ class ProductWidget extends StatelessWidget {
             thickness: 2,
           ),
           Expanded(
-              flex: 10,
+              flex: 12,
               child: (addedToCart % 3 != 0)
                   ? GestureDetector(
                       onTap: () {},
@@ -264,10 +264,11 @@ class ProductWidget extends StatelessWidget {
                       children: [
                         const Icon(Icons.remove, color: kMainColor),
                         const VerticalDivider(
-                            indent: 0, endIndent: 0, thickness: 2),
-                        Text("$addedToCart"),
-                        const VerticalDivider(thickness: 2),
-                        const Icon(Icons.add, color: kMainColor)
+                            color: kMainColorTransparent, thickness: 2),
+                        Text("${addedToCart % 8 + 1}"),
+                        const VerticalDivider(
+                            color: kMainColorTransparent, thickness: 2),
+                        const Icon(Icons.add, color: Colors.orange)
                       ],
                     )),
         ],

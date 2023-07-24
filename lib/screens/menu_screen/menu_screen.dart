@@ -195,8 +195,10 @@ class ProductWidget extends StatelessWidget {
                   right: 0,
                   child: IconButton(
                     onPressed: () {},
-                    icon: const Icon(
-                      Icons.favorite,
+                    icon: Icon(
+                      (addedToCart % 5 == 0)
+                          ? Icons.favorite
+                          : Icons.favorite_border,
                       color: kMainColor,
                     ),
                     alignment: Alignment.topRight,
@@ -241,7 +243,7 @@ class ProductWidget extends StatelessWidget {
           ),
           Expanded(
               flex: 10,
-              child: (addedToCart % 3 == 0)
+              child: (addedToCart % 3 != 0)
                   ? GestureDetector(
                       onTap: () {},
                       child: Container(

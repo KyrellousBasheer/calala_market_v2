@@ -1,3 +1,4 @@
+import 'package:calala_market/constants.dart';
 import 'package:calala_market/screens/menu_screen/widgets/search_bar.dart';
 import 'package:calala_market/services/dummy_data_generator.dart';
 import 'package:calala_market/services/models/category.dart';
@@ -31,7 +32,7 @@ class MenuScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: const Color.fromARGB(229, 76, 175, 79),
+                      color: kMainColor,
                       width: 2,
                     ),
                     image: const DecorationImage(
@@ -49,7 +50,7 @@ class MenuScreen extends StatelessWidget {
                   Icons.shopping_cart_outlined,
                   size: 30,
                 ),
-                color: Colors.black87,
+                color: kBlack87,
               ),
             )
           ],
@@ -119,7 +120,7 @@ class _CustomTabView extends StatelessWidget {
                           ),
                         ))
                     .toList(),
-                labelColor: Colors.black87,
+                labelColor: kBlack87,
               ),
             ),
             Expanded(
@@ -155,6 +156,8 @@ class ProductsView extends StatelessWidget {
   }
 }
 
+var addedToCart = 0;
+
 class ProductWidget extends StatelessWidget {
   const ProductWidget({
     Key? key,
@@ -162,23 +165,25 @@ class ProductWidget extends StatelessWidget {
   }) : super(key: key);
 
   final Product product;
+
   @override
   Widget build(BuildContext context) {
+    addedToCart++;
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(7)),
         border: Border.all(
-          color: const Color.fromARGB(81, 76, 175, 79),
+          color: kMainColorTransparent,
           width: 1.5,
         ),
       ),
       margin: const EdgeInsets.all(5),
       alignment: Alignment.center,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.width /
-                2.8, // Adjust the height as needed
+          Expanded(
+            flex: 6,
             child: Stack(
               children: [
                 Image.network(
@@ -192,8 +197,7 @@ class ProductWidget extends StatelessWidget {
                     onPressed: () {},
                     icon: const Icon(
                       Icons.favorite,
-                      // color: Colors.black54,
-                      color: Color.fromARGB(229, 76, 175, 79),
+                      color: kMainColor,
                     ),
                     alignment: Alignment.topRight,
                   ),
@@ -201,33 +205,49 @@ class ProductWidget extends StatelessWidget {
               ],
             ),
           ),
-          const Text(
-            "\$39.5",
-            style: TextStyle(
-              color: Color.fromARGB(229, 76, 175, 79),
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
+          Expanded(
+            child: Text(
+              product.title,
+              style: const TextStyle(
+                color: Colors.black54,
+                fontSize: 18,
+                fontWeight: FontWeight.w900,
+              ),
             ),
           ),
-          Text(
-            product.title,
-            style: const TextStyle(
-              color: Colors.black54,
-              fontSize: 18,
-              fontWeight: FontWeight.w900,
+          const Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "\$39.5",
+                  style: TextStyle(
+                    color: kMainColor,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                Text("for 1 kilo"),
+              ],
             ),
           ),
-          const Text("Each"),
           const Divider(
-            color: Color.fromARGB(81, 76, 175, 79),
+            color: kMainColorTransparent,
             thickness: 2,
           ),
-          const Text(
-            "Add to Cart",
-            style: TextStyle(
-              color: Color.fromARGB(229, 76, 175, 79),
-              fontSize: 17,
-              fontWeight: FontWeight.w900,
+          Expanded(
+            flex: 1,
+            child: GestureDetector(
+              onTap: () {},
+              child: const Text(
+                "Add to Cart",
+                style: TextStyle(
+                  color: kMainColor,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
             ),
           ),
         ],

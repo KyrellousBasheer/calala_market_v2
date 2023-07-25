@@ -264,10 +264,16 @@ class ProductWidget extends StatelessWidget {
                       children: [
                         const Icon(Icons.remove, color: kMainColor),
                         const VerticalDivider(
-                            color: kMainColorTransparent, thickness: 2),
+                          color: kMainColorTransparent,
+                          thickness: 2,
+                          width: 0,
+                        ),
                         Text("${addedToCart % 8 + 1}"),
                         const VerticalDivider(
-                            color: kMainColorTransparent, thickness: 2),
+                          color: kMainColorTransparent,
+                          thickness: 2,
+                          width: 0,
+                        ),
                         const Icon(Icons.add, color: Colors.orange)
                       ],
                     )),

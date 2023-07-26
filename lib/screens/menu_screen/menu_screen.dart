@@ -263,26 +263,35 @@ class ProductWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        SmallIconBtn(
-                          icon: Icons.remove,
-                          iconColor: Colors.green,
-                          onPressed: () {},
+                        Expanded(
+                          flex: 10,
+                          child: SmallIconBtn(
+                            icon: Icons.remove,
+                            iconColor: Colors.green,
+                            onPressed: () {},
+                          ),
                         ),
                         const VerticalDivider(
                           color: kMainColorTransparent,
                           thickness: 2,
                           width: 0,
                         ),
-                        Text("${addedToCart % 8 + 1}"),
+                        Expanded(
+                            flex: 15,
+                            child:
+                                Center(child: Text("${addedToCart % 20 + 1}"))),
                         const VerticalDivider(
                           color: kMainColorTransparent,
                           thickness: 2,
                           width: 0,
                         ),
-                        SmallIconBtn(
-                          icon: Icons.add,
-                          onPressed: () {},
-                          iconColor: Colors.orange,
+                        Expanded(
+                          flex: 10,
+                          child: SmallIconBtn(
+                            icon: Icons.add,
+                            onPressed: () {},
+                            iconColor: Colors.orange,
+                          ),
                         )
                       ],
                     )),

@@ -262,7 +262,11 @@ class ProductWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        const Icon(Icons.remove, color: kMainColor),
+                        SmallIconBtn(
+                          icon: Icons.remove,
+                          iconColor: Colors.green,
+                          onPressed: () {},
+                        ),
                         const VerticalDivider(
                           color: kMainColorTransparent,
                           thickness: 2,
@@ -274,11 +278,46 @@ class ProductWidget extends StatelessWidget {
                           thickness: 2,
                           width: 0,
                         ),
-                        const Icon(Icons.add, color: Colors.orange)
+                        SmallIconBtn(
+                          icon: Icons.add,
+                          onPressed: () {},
+                          iconColor: Colors.orange,
+                        )
                       ],
                     )),
         ],
       ),
+    );
+  }
+}
+
+class SmallIconBtn extends StatelessWidget {
+  const SmallIconBtn({
+    super.key,
+    this.onPressed,
+    this.iconSize,
+    this.radius,
+    this.splashRadius,
+    required this.icon,
+    required this.iconColor,
+  });
+  final VoidCallback? onPressed;
+  final IconData icon;
+  final Color? iconColor;
+  final double? iconSize;
+  final double? splashRadius;
+  final double? radius;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      iconSize: iconSize ?? 20,
+      splashRadius: splashRadius ?? 20,
+      constraints:
+          BoxConstraints(maxWidth: radius ?? 17, maxHeight: radius ?? 17),
+      padding: EdgeInsets.zero,
+      onPressed: onPressed,
+      icon: Icon(icon, color: iconColor),
     );
   }
 }

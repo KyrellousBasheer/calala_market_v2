@@ -247,16 +247,17 @@ class ProductWidget extends StatelessWidget {
                   ? GestureDetector(
                       onTap: () {},
                       child: Container(
-                        alignment: Alignment.center,
-                        child: const Text(
-                          "Add to Cart",
-                          style: TextStyle(
-                            color: kMainColor,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                      ),
+                          alignment: Alignment.center,
+                          child: TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              "Add to Cart",
+                              style: TextStyle(
+                                color: kMainColor,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          )),
                     )
                   : Row(
                       crossAxisAlignment: CrossAxisAlignment.center,

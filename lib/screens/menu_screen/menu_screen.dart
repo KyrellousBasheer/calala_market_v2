@@ -58,11 +58,11 @@ class MenuScreen extends StatelessWidget {
           ],
           title: const SearchField(),
           backgroundColor: Colors.transparent,
-          toolbarHeight: kScreenSize!.width / 6,
+          toolbarHeight: kScreenSize!.height / 12,
           elevation: 0,
         ),
         body: const Padding(
-          padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+          padding: EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
               SizedBox(height: 10),

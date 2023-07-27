@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -14,7 +16,7 @@ class _PacmanScreenState extends State<PacmanScreen> {
   final height = 5;
   int playerX = 0;
   int playerY = 0;
-
+  List<Point> snake = [const Point(0, 0)];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,16 +28,32 @@ class _PacmanScreenState extends State<PacmanScreen> {
           if (e is RawKeyDownEvent) {
             var getEventTrigger = {
               LogicalKeyboardKey.arrowUp: () {
-                playerY = (playerY - 1) % height;
+                snake.insert(
+                    0, Point(snake.first.x, (snake.first.y - 1) % height));
+                if (snake.length > 4) {
+                  snake.removeLast();
+                }
               },
               LogicalKeyboardKey.arrowDown: () {
-                playerY = (playerY + 1) % height;
+                snake.insert(
+                    0, Point(snake.first.x, (snake.first.y + 1) % height));
+                if (snake.length > 4) {
+                  snake.removeLast();
+                }
               },
               LogicalKeyboardKey.arrowLeft: () {
-                playerX = (playerX - 1) % width;
+                snake.insert(
+                    0, Point(snake.first.x - 1, (snake.first.y) % height));
+                if (snake.length > 4) {
+                  snake.removeLast();
+                }
               },
               LogicalKeyboardKey.arrowRight: () {
-                playerX = (playerX + 1) % width;
+                snake.insert(
+                    0, Point(snake.first.x + 1, (snake.first.y) % height));
+                if (snake.length > 4) {
+                  snake.removeLast();
+                }
               },
             };
             setState(() {
@@ -66,8 +84,10 @@ class _PacmanScreenState extends State<PacmanScreen> {
                           borderRadius: BorderRadius.circular(5),
                           child: Container(
                             alignment: Alignment.center,
-                            color: (x == playerX && y == playerY)
-                                ? Colors.redAccent
+                            color: (snake.contains(Point(x, y)))
+                                ? Colors.redAccent.withOpacity((snake.length -
+                                        snake.indexOf(Point(x, y))) /
+                                    snake.length)
                                 : Colors.greenAccent.withOpacity(.3),
                           ),
                         ),

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:calala_market/constants.dart';
 import 'package:calala_market/screens/menu_screen/widgets/search_bar.dart';
 import 'package:calala_market/services/dummy_data_generator.dart';
@@ -56,7 +58,7 @@ class MenuScreen extends StatelessWidget {
           ],
           title: const SearchField(),
           backgroundColor: Colors.transparent,
-          toolbarHeight: MediaQuery.of(context).size.width / 6,
+          toolbarHeight: kScreenSize!.width / 6,
           elevation: 0,
         ),
         body: const Padding(
@@ -186,22 +188,25 @@ class ProductWidget extends StatelessWidget {
             flex: 50,
             child: Stack(
               children: [
-                Image.network(
-                  product.imageUrl,
-                  fit: BoxFit.cover,
+                SizedBox(
+                  width: double.infinity,
+                  child: Image.network(
+                    product.imageUrl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Positioned(
                   top: 0,
                   right: 0,
-                  child: IconButton(
+                  child: SmallIconBtn(
+                    icon: (addedToCart % 5 == 0)
+                        ? Icons.favorite
+                        : Icons.favorite_border,
                     onPressed: () {},
-                    icon: Icon(
-                      (addedToCart % 5 == 0)
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: kMainColor,
-                    ),
-                    alignment: Alignment.topRight,
+                    iconColor: kMainColor,
+                    radius: 25,
+                    paddingRadius: 5,
+                    splashRadius: 30,
                   ),
                 ),
               ],
@@ -306,8 +311,9 @@ class SmallIconBtn extends StatelessWidget {
     super.key,
     this.onPressed,
     this.iconSize,
-    this.radius,
+    this.radius = 17,
     this.splashRadius,
+    this.paddingRadius = 0,
     required this.icon,
     required this.iconColor,
   });
@@ -316,18 +322,26 @@ class SmallIconBtn extends StatelessWidget {
   final Color? iconColor;
   final double? iconSize;
   final double? splashRadius;
-  final double? radius;
+  final double radius;
+  final double paddingRadius;
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      iconSize: iconSize ?? 20,
-      splashRadius: splashRadius ?? 20,
-      constraints:
-          BoxConstraints(maxWidth: radius ?? 17, maxHeight: radius ?? 17),
-      padding: EdgeInsets.zero,
-      onPressed: onPressed,
-      icon: Icon(icon, color: iconColor),
+    return Container(
+      margin: EdgeInsets.all(paddingRadius),
+      child: IconButton(
+        iconSize: kScreenSize!.width / 20, // iconSize ?? radius,
+        splashRadius: max(max(radius / 2, splashRadius ?? 0), 17) + 3,
+        constraints: BoxConstraints(
+          maxWidth: radius,
+          maxHeight: radius,
+          minWidth: radius,
+          minHeight: radius,
+        ),
+        padding: EdgeInsets.zero,
+        onPressed: onPressed,
+        icon: Icon(icon, color: iconColor),
+      ),
     );
   }
 }

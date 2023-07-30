@@ -17,61 +17,59 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        key: _scaffoldKey,
-        drawer: const MainDrawer(),
-        appBar: AppBar(
-          leading: Padding(
-              padding: const EdgeInsets.only(left: 9.0),
-              child: GestureDetector(
-                onTap: () {
-                  _scaffoldKey.currentState?.openDrawer();
-                },
-                child: Container(
-                  width: 150,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: kMainColor,
-                      width: 2,
-                    ),
-                    image: const DecorationImage(
-                      image: NetworkImage(profileImageUrl),
-                    ),
+    return Scaffold(
+      key: _scaffoldKey,
+      drawer: const MainDrawer(),
+      appBar: AppBar(
+        leading: Padding(
+            padding: const EdgeInsets.only(left: 9.0),
+            child: GestureDetector(
+              onTap: () {
+                _scaffoldKey.currentState?.openDrawer();
+              },
+              child: Container(
+                width: 150,
+                height: 150,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: kMainColor,
+                    width: 2,
+                  ),
+                  image: const DecorationImage(
+                    image: NetworkImage(profileImageUrl),
                   ),
                 ),
-              )),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.shopping_cart_outlined,
-                  size: 30,
-                ),
-                color: kBlack87,
               ),
-            )
-          ],
-          title: const SearchField(),
-          backgroundColor: Colors.transparent,
-          toolbarHeight: kScreenSize!.height / 12,
-          elevation: 0,
-        ),
-        body: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            children: [
-              SizedBox(height: 10),
-              _CategoriesAndProducts(),
-            ],
-          ),
-        ),
-        bottomNavigationBar: const MainBottomNavBar(),
+            )),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.shopping_cart_outlined,
+                size: 30,
+              ),
+              color: kBlack87,
+            ),
+          )
+        ],
+        title: const SearchField(),
+        backgroundColor: Colors.transparent,
+        toolbarHeight: kScreenSize!.height / 12,
+        elevation: 0,
       ),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          children: [
+            SizedBox(height: 10),
+            _CategoriesAndProducts(),
+          ],
+        ),
+      ),
+      bottomNavigationBar: const MainBottomNavBar(),
     );
   }
 }

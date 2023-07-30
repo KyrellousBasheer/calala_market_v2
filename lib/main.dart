@@ -1,4 +1,5 @@
 import 'package:calala_market/screens/menu_screen/menu_screen.dart';
+import 'package:calala_market/screens/snake_game_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'constants.dart';
@@ -12,7 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     kScreenSize = MediaQuery.of(context).size;
     return MaterialApp(
-      home: MenuScreen(),
+      // home: const SnakeGameScreen(),
+      routes: {
+        "/": (context) => MenuScreen(),
+        "snakeGameScreen": (context) => const SnakeGameScreen()
+      },
     );
   }
 }

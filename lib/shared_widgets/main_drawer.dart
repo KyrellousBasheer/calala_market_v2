@@ -50,6 +50,14 @@ class MainDrawer extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.gamepad_outlined),
+            title: const Text('Snake Game'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, "snakeGameScreen");
+            },
+          ),
         ],
       ),
     );

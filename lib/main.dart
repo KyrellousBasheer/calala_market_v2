@@ -1,5 +1,5 @@
 import 'package:calala_market/screens/menu_screen/menu_screen.dart';
-import 'package:calala_market/screens/snake_game_screen.dart';
+import 'package:calala_market/screens/snake_screen/snake_game_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'constants.dart';

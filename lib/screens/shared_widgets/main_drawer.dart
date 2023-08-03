@@ -1,3 +1,4 @@
+import 'package:calala_market/services/dummy_data_generator.dart';
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -7,6 +8,58 @@ class MainDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Drawer();
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          const UserAccountsDrawerHeader(
+            accountName: Text('Calala Kero'),
+            accountEmail: Text('Calala@Kero.com'),
+            currentAccountPicture: CircleAvatar(
+              backgroundImage: NetworkImage(profileImageUrl),
+            ),
+            decoration: BoxDecoration(
+              color: Colors.green,
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.home),
+            title: const Text('Home'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.message),
+            title: const Text('Contact Us'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.settings),
+            title: const Text('Settings'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text('Log out'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.gamepad_outlined),
+            title: const Text('Snake Game'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, "snakeGameScreen");
+            },
+          ),
+        ],
+      ),
+    );
   }
 }

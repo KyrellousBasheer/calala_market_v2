@@ -2,17 +2,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class SearchField extends StatelessWidget {
-  const SearchField();
-
+  const SearchField({super.key, this.onSubmitted, this.onChanged});
+  final void Function(String)? onSubmitted;
+  final void Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
-    final void Function(String) onSubmitted;
-    final void Function(String) onChanged;
     TextEditingController controller = TextEditingController();
 
     return TextField(
-      onChanged: (text) {},
-      onSubmitted: (text) {},
+      onChanged: onChanged,
+      onSubmitted: onSubmitted,
       controller: controller,
       decoration: InputDecoration(
         border: const OutlineInputBorder(

@@ -1,3 +1,4 @@
+import 'package:calala_market/screens/snake_screen/snake_game_screen.dart';
 import 'package:calala_market/services/dummy_data_generator.dart';
 import 'package:flutter/material.dart';
 
@@ -55,7 +56,7 @@ class MainDrawer extends StatelessWidget {
             title: const Text('Snake Game'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushNamed(context, "snakeGameScreen");
+              Navigator.pushNamed(context, SnakeGameScreen.routeName);
             },
           ),
         ],

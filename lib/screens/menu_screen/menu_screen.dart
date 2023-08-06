@@ -1,17 +1,20 @@
 import 'dart:math';
 
 import 'package:calala_market/constants.dart';
+import 'package:calala_market/screens/menu_screen/providers/item_count_provider.dart';
 import 'package:calala_market/screens/menu_screen/widgets/search_bar.dart';
+import 'package:calala_market/screens/order_screen/order_screen.dart';
+import 'package:calala_market/screens/shared_widgets/main_drawer.dart';
 import 'package:calala_market/services/dummy_data_generator.dart';
 import 'package:calala_market/services/models/category.dart';
 import 'package:calala_market/services/models/product.dart';
-import 'package:calala_market/shared_widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/bottom_nav_bar.dart';
 
 class MenuScreen extends StatelessWidget {
-  static const String routeName = "menu-screen";
+  static const String routeName = "/";
   MenuScreen({super.key});
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -21,8 +24,10 @@ class MenuScreen extends StatelessWidget {
       key: _scaffoldKey,
       drawer: const MainDrawer(),
       appBar: AppBar(
-        leading: Padding(
-            padding: const EdgeInsets.only(left: 9.0),
+        leading: Container(
+            // padding: const EdgeInsets.only(left: 9.0),
+            width: 30,
+            alignment: Alignment.centerLeft,
             child: GestureDetector(
               onTap: () {
                 _scaffoldKey.currentState?.openDrawer();
@@ -46,11 +51,39 @@ class MenuScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.shopping_cart_outlined,
-                size: 30,
-              ),
+              onPressed: () {
+                Navigator.of(context).pushNamed(OrderScreen.routeName);
+              },
+              icon: Stack(children: [
+                const Center(
+                  child: Icon(
+                    Icons.shopping_cart_outlined,
+                    size: 30,
+                  ),
+                ),
+                Consumer<OrderChangesProvider>(
+                  builder: (context, orderChangesProvider, child) {
+                    var totalCount = orderChangesProvider.totalCount;
+                    if (totalCount > 0) {
+                      return Positioned(
+                        right: 0,
+                        top: 0,
+                        child: CircleAvatar(
+                          radius: 12,
+                          backgroundColor: Colors.red,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text("$totalCount")),
+                          ),
+                        ),
+                      );
+                    }
+                    return Container();
+                  },
+                )
+              ]),
               color: kBlack87,
             ),
           )
@@ -147,7 +180,7 @@ class ProductsView extends StatelessWidget {
         crossAxisCount: 2,
         childAspectRatio: 1 / 1.4,
         mainAxisSpacing: 10,
-        crossAxisSpacing: 20,
+        crossAxisSpacing: 0,
       ),
       itemCount: category.relatedProducts.length,
       itemBuilder: (context, index) =>
@@ -168,7 +201,6 @@ class ProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    addedToCart++;
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(7)),
@@ -212,12 +244,15 @@ class ProductWidget extends StatelessWidget {
           ),
           Expanded(
             flex: 10,
-            child: Text(
-              product.title,
-              style: const TextStyle(
-                color: Colors.black54,
-                fontSize: 18,
-                fontWeight: FontWeight.w900,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                product.title,
+                style: const TextStyle(
+                  color: Colors.black54,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
             ),
           ),
@@ -227,12 +262,15 @@ class ProductWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "\$39.5",
-                  style: TextStyle(
-                    color: kMainColor,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    "\$39.5",
+                    style: TextStyle(
+                      color: kMainColor,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
                 Text("for 1 kilo"),
@@ -246,58 +284,73 @@ class ProductWidget extends StatelessWidget {
           ),
           Expanded(
               flex: 12,
-              child: (addedToCart % 3 != 0)
-                  ? GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                          alignment: Alignment.center,
-                          child: TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              "Add to Cart",
-                              style: TextStyle(
-                                color: kMainColor,
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
-                          )),
-                    )
-                  : Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Expanded(
-                          flex: 10,
-                          child: SmallIconBtn(
-                            icon: Icons.remove,
-                            iconColor: Colors.green,
-                            onPressed: () {},
-                          ),
-                        ),
-                        const VerticalDivider(
-                          color: kMainColorTransparent,
-                          thickness: 2,
-                          width: 0,
-                        ),
-                        Expanded(
-                            flex: 15,
-                            child:
-                                Center(child: Text("${addedToCart % 20 + 1}"))),
-                        const VerticalDivider(
-                          color: kMainColorTransparent,
-                          thickness: 2,
-                          width: 0,
-                        ),
-                        Expanded(
-                          flex: 10,
-                          child: SmallIconBtn(
-                            icon: Icons.add,
-                            onPressed: () {},
-                            iconColor: Colors.orange,
+              child: Consumer<OrderChangesProvider>(
+                builder: (context, orderChangesProvider, child) {
+                  var count = orderChangesProvider.productCount(product);
+                  return (count < 1)
+                      ? GestureDetector(
+                          onTap: () {
+                            orderChangesProvider.addProduct(product);
+                          },
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Container(
+                                alignment: Alignment.center,
+                                child: TextButton(
+                                  onPressed: () {
+                                    orderChangesProvider.addProduct(product);
+                                  },
+                                  child: const Text(
+                                    "Add to Cart",
+                                    style: TextStyle(
+                                      color: kMainColor,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                )),
                           ),
                         )
-                      ],
-                    )),
+                      : Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              flex: 10,
+                              child: SmallIconBtn(
+                                icon: Icons.remove,
+                                iconColor: Colors.green,
+                                onPressed: () {
+                                  orderChangesProvider.removeProduct(product);
+                                },
+                              ),
+                            ),
+                            const VerticalDivider(
+                              color: kMainColorTransparent,
+                              thickness: 2,
+                              width: 0,
+                            ),
+                            Expanded(
+                                flex: 15, child: Center(child: Text("$count"))),
+                            const VerticalDivider(
+                              color: kMainColorTransparent,
+                              thickness: 2,
+                              width: 0,
+                            ),
+                            Expanded(
+                              flex: 10,
+                              child: SmallIconBtn(
+                                icon: Icons.add,
+                                onPressed: () {
+                                  orderChangesProvider.addProduct(product);
+                                },
+                                iconColor: Colors.orange,
+                              ),
+                            )
+                          ],
+                        );
+                },
+              )),
         ],
       ),
     );

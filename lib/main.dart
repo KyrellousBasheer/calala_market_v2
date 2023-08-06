@@ -1,4 +1,5 @@
 import 'package:calala_market/screens/menu_screen/menu_screen.dart';
+import 'package:calala_market/screens/order_screen/order_screen.dart';
 import 'package:calala_market/screens/snake_screen/snake_game_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -13,11 +14,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     kScreenSize = MediaQuery.of(context).size;
     return MaterialApp(
-      // home: const SnakeGameScreen(),
       routes: {
-        "/": (context) => MenuScreen(),
-        "snakeGameScreen": (context) => const SnakeGameScreen()
+        MenuScreen.routeName: (context) => MenuScreen(),
+        SnakeGameScreen.routeName: (context) => const SnakeGameScreen(),
+        OrderScreen.routeName: (context) => const OrderScreen()
       },
+      theme: ThemeData(primaryColor: Colors.green),
     );
   }
 }

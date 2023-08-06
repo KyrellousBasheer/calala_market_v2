@@ -516,10 +516,7 @@ class DummyDataGenerator {
             iconUrl: defaultCategoryIconUrl,
             relatedProducts: (obj["products"] as List)
                 .map((pObj) => Product(
-                      pObj["id"],
-                      pObj["title"],
-                      placeholderImageUrl,
-                    ))
+                    pObj["id"], pObj["title"], placeholderImageUrl, 10.0))
                 .toList(),
           ),
         )

@@ -9,6 +9,7 @@ enum Direction { stop, up, down, left, right }
 
 class SnakeGameScreen extends StatefulWidget {
   const SnakeGameScreen({super.key});
+  static const String routeName = "SnakeGameScreen";
 
   @override
   State<SnakeGameScreen> createState() => _SnakeGameScreenState();

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:calala_market/services/models/product.dart';
 
 import 'models/category.dart';
@@ -516,7 +518,11 @@ class DummyDataGenerator {
             iconUrl: defaultCategoryIconUrl,
             relatedProducts: (obj["products"] as List)
                 .map((pObj) => Product(
-                    pObj["id"], pObj["title"], placeholderImageUrl, 10.0))
+                      pObj["id"],
+                      pObj["title"],
+                      placeholderImageUrl,
+                      (Random().nextInt(100) + 100),
+                    ))
                 .toList(),
           ),
         )

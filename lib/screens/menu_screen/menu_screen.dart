@@ -246,7 +246,7 @@ class ProductWidget extends StatelessWidget {
             flex: 10,
             child: FittedBox(
               fit: BoxFit.scaleDown,
-              child: Text(
+              child: SelectableText(
                 product.title,
                 style: const TextStyle(
                   color: Colors.black54,
@@ -256,7 +256,7 @@ class ProductWidget extends StatelessWidget {
               ),
             ),
           ),
-          const Expanded(
+          Expanded(
             flex: 10,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -265,15 +265,15 @@ class ProductWidget extends StatelessWidget {
                 FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(
-                    "\$39.5",
-                    style: TextStyle(
+                    "\$${product.price}",
+                    style: const TextStyle(
                       color: kMainColor,
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
-                Text("for 1 kilo"),
+                const Text("for 1 kilo"),
               ],
             ),
           ),

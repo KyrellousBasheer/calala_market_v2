@@ -21,4 +21,5 @@ class OrderChangesProvider extends ChangeNotifier {
 
   int productCount(Product product) => activeOrder.productCount(product);
   int get totalCount => activeOrder.totalCount;
+  double get totalCost => activeOrder.totalCost;
 }

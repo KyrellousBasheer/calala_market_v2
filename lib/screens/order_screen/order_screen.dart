@@ -78,33 +78,122 @@ class OrderItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-      key: Key(product.id.toString()),
-      onDismissed: (direction) {
-        Provider.of<OrderProvider>(context, listen: false)
-            .removeProduct(product, allEntries: true);
-      },
-      confirmDismiss: (direction) async {
-        return (direction == DismissDirection.startToEnd) ? false : true;
-      },
-      secondaryBackground: Container(
-        color: Colors.redAccent,
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Expanded(child: Container()),
-          const Padding(
-            padding: EdgeInsets.only(right: 10.0),
-            child: Icon(
-              Icons.delete_sweep,
-              size: 30,
-              color: Colors.white,
+        key: Key(product.id.toString()),
+        onDismissed: (direction) {
+          Provider.of<OrderProvider>(context, listen: false)
+              .removeProduct(product, allEntries: true);
+        },
+        confirmDismiss: (direction) async {
+          return (direction == DismissDirection.startToEnd) ? false : true;
+        },
+        secondaryBackground: Container(
+          color: Colors.redAccent,
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Expanded(child: Container()),
+            const Padding(
+              padding: EdgeInsets.only(right: 10.0),
+              child: Icon(
+                Icons.delete_sweep,
+                size: 30,
+                color: Colors.white,
+              ),
+            ),
+          ]),
+        ),
+        background: Container(),
+        child: OrderScreenItemWidget(
+          imageUrl: product.imageUrl,
+          productName: product.title,
+          price: product.price,
+          orderCount: count,
+          onAdd: () {},
+          onRemove: () {},
+        ));
+  }
+}
+
+class OrderScreenItemWidget extends StatelessWidget {
+  final String productName;
+  final double price;
+  final String imageUrl;
+  final int orderCount;
+  final VoidCallback onAdd;
+  final VoidCallback onRemove;
+
+  const OrderScreenItemWidget({
+    super.key,
+    required this.productName,
+    required this.price,
+    required this.imageUrl,
+    required this.orderCount,
+    required this.onAdd,
+    required this.onRemove,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.network(
+              imageUrl,
+              width: 80,
+              height: 80,
+              fit: BoxFit.cover,
             ),
           ),
-        ]),
-      ),
-      background: Container(),
-      child: ListTile(
-        title: Text(product.title),
-        trailing: Text("$count"),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  productName,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text('\$$price'),
+              ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.remove),
+                onPressed: onRemove,
+              ),
+              Text(
+                orderCount.toString(),
+                style: const TextStyle(fontSize: 16),
+              ),
+              IconButton(
+                icon: const Icon(Icons.add),
+                onPressed: onAdd,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

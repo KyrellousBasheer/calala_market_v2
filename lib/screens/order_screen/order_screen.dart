@@ -1,4 +1,5 @@
 import 'package:calala_market/screens/menu_screen/providers/item_count_provider.dart';
+import 'package:calala_market/services/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,7 @@ class OrderScreen extends StatelessWidget {
       ),
       body: Padding(
           padding: const EdgeInsets.only(bottom: 10),
-          child: Consumer<OrderChangesProvider>(
+          child: Consumer<OrderProvider>(
             builder: (context, value, child) {
               var activeOrder = value.activeOrder;
 
@@ -31,17 +32,19 @@ class OrderScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                           Expanded(
-                            child: ListView.builder(
+                            child: ListView.separated(
                               itemCount: activeOrder.productsList.length,
+                              separatorBuilder: (context, index) =>
+                                  const Divider(
+                                thickness: 2,
+                              ),
                               itemBuilder: (context, index) {
                                 var product =
                                     activeOrder.productsList[index].key;
                                 var count =
                                     activeOrder.productsList[index].value;
-                                return ListTile(
-                                  title: Text(product.title),
-                                  trailing: Text("$count"),
-                                );
+                                return OrderItemWidget(
+                                    product: product, count: count);
                               },
                             ),
                           ),
@@ -50,7 +53,7 @@ class OrderScreen extends StatelessWidget {
                               height: kScreenSize!.height / 14,
                               child: ElevatedButton(
                                   onPressed: () {},
-                                  child: Consumer<OrderChangesProvider>(
+                                  child: Consumer<OrderProvider>(
                                       builder: (context, orderChangesProvider,
                                               child) =>
                                           Text(
@@ -58,6 +61,51 @@ class OrderScreen extends StatelessWidget {
                         ]);
             },
           )),
+    );
+  }
+}
+
+class OrderItemWidget extends StatelessWidget {
+  const OrderItemWidget({
+    super.key,
+    required this.product,
+    required this.count,
+  });
+
+  final Product product;
+  final int count;
+
+  @override
+  Widget build(BuildContext context) {
+    return Dismissible(
+      key: Key(product.id.toString()),
+      onDismissed: (direction) {
+        Provider.of<OrderProvider>(context, listen: false)
+            .removeProduct(product, allEntries: true);
+      },
+      confirmDismiss: (direction) async {
+        return (direction == DismissDirection.startToEnd) ? false : true;
+      },
+      secondaryBackground: Container(
+        color: Colors.redAccent,
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Expanded(child: Container()),
+          const Padding(
+            padding: EdgeInsets.only(right: 10.0),
+            child: Icon(
+              Icons.delete_sweep,
+              size: 30,
+              color: Colors.white,
+            ),
+          ),
+        ]),
+      ),
+      background: Container(),
+      child: ListTile(
+        title: Text(product.title),
+        trailing: Text("$count"),
+      ),
     );
   }
 }

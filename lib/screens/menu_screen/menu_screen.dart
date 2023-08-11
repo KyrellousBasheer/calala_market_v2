@@ -60,7 +60,7 @@ class MenuScreen extends StatelessWidget {
                     size: 30,
                   ),
                 ),
-                Consumer<OrderChangesProvider>(
+                Consumer<OrderProvider>(
                   builder: (context, orderChangesProvider, child) {
                     var totalCount = orderChangesProvider.totalCount;
                     if (totalCount > 0) {
@@ -283,7 +283,7 @@ class ProductWidget extends StatelessWidget {
           ),
           Expanded(
               flex: 12,
-              child: Consumer<OrderChangesProvider>(
+              child: Consumer<OrderProvider>(
                 builder: (context, orderChangesProvider, child) {
                   var count = orderChangesProvider.productCount(product);
                   return (count < 1)

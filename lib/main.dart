@@ -16,9 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     kScreenSize = MediaQuery.of(context).size;
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => OrderChangesProvider())
-      ],
+      providers: [ChangeNotifierProvider(create: (context) => OrderProvider())],
       child: MaterialApp(
         routes: {
           MenuScreen.routeName: (context) => MenuScreen(),

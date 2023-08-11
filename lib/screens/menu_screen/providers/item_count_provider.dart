@@ -2,7 +2,7 @@ import 'package:calala_market/services/models/order.dart';
 import 'package:calala_market/services/models/product.dart';
 import 'package:flutter/foundation.dart';
 
-class OrderChangesProvider extends ChangeNotifier {
+class OrderProvider extends ChangeNotifier {
   Order activeOrder = Order();
 
   int addProduct(Product product) {

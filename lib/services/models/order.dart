@@ -23,7 +23,7 @@ class Order {
     return count;
   }
 
-  int removeProduct(Product product) {
+  int removeProduct(Product product, {allEntries = false}) {
     // Find the product in productsList
 
     int index = productsList.indexWhere((entry) => entry.key == product);
@@ -31,8 +31,7 @@ class Order {
     if (index < 0) return 0;
     var entry = productsList[index];
     int count = 0;
-
-    if (entry.value == 1) {
+    if (allEntries || entry.value == 1) {
       productsList.removeAt(index);
     } else if (entry.value > 1) {
       count = productsList[index].value - 1;

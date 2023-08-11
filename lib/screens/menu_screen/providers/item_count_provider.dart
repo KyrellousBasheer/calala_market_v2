@@ -11,10 +11,8 @@ class OrderChangesProvider extends ChangeNotifier {
     return count;
   }
 
-  int removeProduct(Product product) {
-    // Find the product in productsList
-
-    var count = activeOrder.removeProduct(product);
+  int removeProduct(Product product, {allEntries = false}) {
+    var count = activeOrder.removeProduct(product, allEntries: allEntries);
     notifyListeners();
     return count;
   }

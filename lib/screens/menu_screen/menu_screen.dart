@@ -24,29 +24,28 @@ class MenuScreen extends StatelessWidget {
       key: _scaffoldKey,
       drawer: const MainDrawer(),
       appBar: AppBar(
-        leading: Container(
-            // padding: const EdgeInsets.only(left: 9.0),
-            width: 30,
-            alignment: Alignment.centerLeft,
-            child: GestureDetector(
-              onTap: () {
-                _scaffoldKey.currentState?.openDrawer();
-              },
-              child: Container(
-                width: 150,
-                height: 150,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: kMainColor,
-                    width: 2,
-                  ),
-                  image: const DecorationImage(
-                    image: NetworkImage(profileImageUrl),
-                  ),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: GestureDetector(
+            onTap: () {
+              _scaffoldKey.currentState?.openDrawer();
+            },
+            child: Container(
+              width: 150,
+              height: 150,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: kMainColor,
+                  width: 2,
+                ),
+                image: const DecorationImage(
+                  image: NetworkImage(profileImageUrl),
                 ),
               ),
-            )),
+            ),
+          ),
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10),

@@ -60,8 +60,8 @@ class MenuScreen extends StatelessWidget {
                   ),
                 ),
                 Consumer<OrderProvider>(
-                  builder: (context, orderChangesProvider, child) {
-                    var totalCount = orderChangesProvider.totalCount;
+                  builder: (context, orderProvider, child) {
+                    var totalCount = orderProvider.totalCount;
                     if (totalCount > 0) {
                       return Positioned(
                         right: 0,
@@ -283,12 +283,12 @@ class ProductWidget extends StatelessWidget {
           Expanded(
               flex: 12,
               child: Consumer<OrderProvider>(
-                builder: (context, orderChangesProvider, child) {
-                  var count = orderChangesProvider.productCount(product);
+                builder: (context, orderProvider, child) {
+                  var count = orderProvider.productCount(product);
                   return (count < 1)
                       ? GestureDetector(
                           onTap: () {
-                            orderChangesProvider.addProduct(product);
+                            orderProvider.addProduct(product);
                           },
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
@@ -296,7 +296,7 @@ class ProductWidget extends StatelessWidget {
                                 alignment: Alignment.center,
                                 child: TextButton(
                                   onPressed: () {
-                                    orderChangesProvider.addProduct(product);
+                                    orderProvider.addProduct(product);
                                   },
                                   child: const Text(
                                     "Add to Cart",
@@ -319,7 +319,7 @@ class ProductWidget extends StatelessWidget {
                                 icon: Icons.remove,
                                 iconColor: Colors.green,
                                 onPressed: () {
-                                  orderChangesProvider.removeProduct(product);
+                                  orderProvider.removeProduct(product);
                                 },
                               ),
                             ),
@@ -340,7 +340,7 @@ class ProductWidget extends StatelessWidget {
                               child: SmallIconBtn(
                                 icon: Icons.add,
                                 onPressed: () {
-                                  orderChangesProvider.addProduct(product);
+                                  orderProvider.addProduct(product);
                                 },
                                 iconColor: Colors.orange,
                               ),

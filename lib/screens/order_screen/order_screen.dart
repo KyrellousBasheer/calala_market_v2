@@ -54,10 +54,10 @@ class OrderScreen extends StatelessWidget {
                               child: ElevatedButton(
                                   onPressed: () {},
                                   child: Consumer<OrderProvider>(
-                                      builder: (context, orderChangesProvider,
+                                      builder: (context, orderProvider,
                                               child) =>
                                           Text(
-                                              "Order now ${orderChangesProvider.totalCost}"))))
+                                              "Order now ${orderProvider.totalCost}"))))
                         ]);
             },
           )),

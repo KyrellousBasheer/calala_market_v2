@@ -54,12 +54,6 @@ class MenuScreen extends StatelessWidget {
                 Navigator.of(context).pushNamed(OrderScreen.routeName);
               },
               icon: Stack(children: [
-                const Center(
-                  child: Icon(
-                    Icons.shopping_cart_outlined,
-                    size: 30,
-                  ),
-                ),
                 Consumer<OrderProvider>(
                   builder: (context, orderProvider, child) {
                     var totalCount = orderProvider.totalCount;
@@ -81,7 +75,13 @@ class MenuScreen extends StatelessWidget {
                     }
                     return Container();
                   },
-                )
+                ),
+                const Center(
+                  child: Icon(
+                    Icons.shopping_cart_outlined,
+                    size: 30,
+                  ),
+                ),
               ]),
               color: kBlack87,
             ),

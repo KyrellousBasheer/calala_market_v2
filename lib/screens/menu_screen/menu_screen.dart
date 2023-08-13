@@ -2,6 +2,7 @@ import 'package:calala_market/constants.dart';
 import 'package:calala_market/screens/menu_screen/providers/item_count_provider.dart';
 import 'package:calala_market/screens/menu_screen/widgets/search_bar.dart';
 import 'package:calala_market/screens/order_screen/order_screen.dart';
+import 'package:calala_market/screens/shared_widgets/add_And_remove_product_to_cart_sidget.dart';
 import 'package:calala_market/screens/shared_widgets/main_drawer.dart';
 import 'package:calala_market/services/dummy_data_generator.dart';
 import 'package:calala_market/services/models/category.dart';
@@ -309,44 +310,8 @@ class ProductWidget extends StatelessWidget {
                                 )),
                           ),
                         )
-                      : Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Expanded(
-                              flex: 10,
-                              child: SmallIconBtn(
-                                icon: Icons.remove,
-                                iconColor: Colors.green,
-                                onPressed: () {
-                                  orderProvider.removeProduct(product);
-                                },
-                              ),
-                            ),
-                            const VerticalDivider(
-                              color: kMainColorTransparent,
-                              thickness: 2,
-                              width: 0,
-                            ),
-                            Expanded(
-                                flex: 15, child: Center(child: Text("$count"))),
-                            const VerticalDivider(
-                              color: kMainColorTransparent,
-                              thickness: 2,
-                              width: 0,
-                            ),
-                            Expanded(
-                              flex: 10,
-                              child: SmallIconBtn(
-                                icon: Icons.add,
-                                onPressed: () {
-                                  orderProvider.addProduct(product);
-                                },
-                                iconColor: Colors.orange,
-                              ),
-                            )
-                          ],
-                        );
+                      : AddAndRemoveProductToCartWidget(
+                          product: product, count: count);
                 },
               )),
         ],

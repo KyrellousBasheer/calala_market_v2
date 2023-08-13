@@ -1,4 +1,5 @@
 import 'package:calala_market/screens/menu_screen/providers/item_count_provider.dart';
+import 'package:calala_market/screens/shared_widgets/add_And_remove_product_to_cart_sidget.dart';
 import 'package:calala_market/services/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -52,12 +53,13 @@ class OrderScreen extends StatelessWidget {
                               width: double.infinity,
                               height: kScreenSize!.height / 14,
                               child: ElevatedButton(
-                                  onPressed: () {},
-                                  child: Consumer<OrderProvider>(
-                                      builder: (context, orderProvider,
-                                              child) =>
-                                          Text(
-                                              "Order now ${orderProvider.totalCost}"))))
+                                onPressed: () {},
+                                child: Consumer<OrderProvider>(
+                                  builder: (context, orderProvider, child) =>
+                                      Text(
+                                          "Order now ${orderProvider.totalCost}"),
+                                ),
+                              ))
                         ]);
             },
           )),
@@ -103,32 +105,21 @@ class OrderItemWidget extends StatelessWidget {
         ),
         background: Container(),
         child: OrderScreenItemWidget(
-          imageUrl: product.imageUrl,
-          productName: product.title,
-          price: product.price,
-          orderCount: count,
-          onAdd: () {},
-          onRemove: () {},
+          product: product,
+          count: count,
         ));
   }
 }
 
 class OrderScreenItemWidget extends StatelessWidget {
-  final String productName;
-  final double price;
-  final String imageUrl;
-  final int orderCount;
-  final VoidCallback onAdd;
-  final VoidCallback onRemove;
+  final int count;
+
+  final Product product;
 
   const OrderScreenItemWidget({
     super.key,
-    required this.productName,
-    required this.price,
-    required this.imageUrl,
-    required this.orderCount,
-    required this.onAdd,
-    required this.onRemove,
+    required this.product,
+    required this.count,
   });
 
   @override
@@ -153,7 +144,7 @@ class OrderScreenItemWidget extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.network(
-              imageUrl,
+              product.imageUrl,
               width: 80,
               height: 80,
               fit: BoxFit.cover,
@@ -165,34 +156,23 @@ class OrderScreenItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  productName,
+                  product.title,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 4),
-                Text('\$$price'),
+                Text('\$${product.price}'),
               ],
             ),
           ),
           const SizedBox(width: 12),
-          Row(
-            children: [
-              IconButton(
-                icon: const Icon(Icons.remove),
-                onPressed: onRemove,
-              ),
-              Text(
-                orderCount.toString(),
-                style: const TextStyle(fontSize: 16),
-              ),
-              IconButton(
-                icon: const Icon(Icons.add),
-                onPressed: onAdd,
-              ),
-            ],
-          ),
+          Expanded(
+              child: AddAndRemoveProductToCartWidget(
+            product: product,
+            count: count,
+          ))
         ],
       ),
     );

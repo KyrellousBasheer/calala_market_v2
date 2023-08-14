@@ -19,7 +19,7 @@ class OrderScreen extends StatelessWidget {
         elevation: 0,
       ),
       body: Padding(
-          padding: const EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsets.only(bottom: 30),
           child: Consumer<OrderProvider>(
             builder: (context, value, child) {
               var activeOrder = value.activeOrder;
@@ -33,36 +33,97 @@ class OrderScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                           Expanded(
-                            child: ListView.separated(
-                              itemCount: activeOrder.productsList.length,
-                              separatorBuilder: (context, index) =>
-                                  const Divider(
-                                thickness: 2,
+                            child: Scrollbar(
+                              thickness: 4,
+                              thumbVisibility: true,
+                              child: ListView.separated(
+                                itemCount: activeOrder.productsList.length,
+                                separatorBuilder: (context, index) =>
+                                    const Divider(thickness: 2),
+                                itemBuilder: (context, index) {
+                                  var product =
+                                      activeOrder.productsList[index].key;
+                                  var count =
+                                      activeOrder.productsList[index].value;
+                                  return OrderItemWidget(
+                                      product: product, count: count);
+                                },
                               ),
-                              itemBuilder: (context, index) {
-                                var product =
-                                    activeOrder.productsList[index].key;
-                                var count =
-                                    activeOrder.productsList[index].value;
-                                return OrderItemWidget(
-                                    product: product, count: count);
-                              },
                             ),
                           ),
-                          SizedBox(
-                              width: double.infinity,
-                              height: kScreenSize!.height / 14,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                child: Consumer<OrderProvider>(
-                                  builder: (context, orderProvider, child) =>
-                                      Text(
-                                          "Order now ${orderProvider.totalCost}"),
-                                ),
-                              ))
+                          const TotalOrderInfoWidget()
                         ]);
             },
           )),
+    );
+  }
+}
+
+class TotalOrderInfoWidget extends StatelessWidget {
+  const TotalOrderInfoWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: kScreenSize!.width / 1.1,
+      height: kScreenSize!.height / 4.5,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
+            height: kScreenSize!.height / 7,
+            decoration: BoxDecoration(
+                color: Colors.greenAccent,
+                borderRadius: BorderRadius.circular(20)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("Sub total"),
+                      Text(
+                          "${Provider.of<OrderProvider>(context).totalCost} EGP"),
+                    ]),
+                const Divider(thickness: 2),
+                const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Shipping"),
+                      Text("10 EGP"),
+                    ]),
+                const Divider(thickness: 2),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("Total"),
+                      Text(
+                          "${Provider.of<OrderProvider>(context).totalCost + 10} EGP"),
+                    ]),
+              ],
+            ),
+          ),
+          SizedBox(
+              height: kScreenSize!.height / 15,
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50.0),
+                    ),
+                    padding: const EdgeInsets.all(16.0),
+                    backgroundColor: Colors.green),
+                onPressed: () {},
+                child: const Text(
+                  "Order now",
+                  style: TextStyle(fontSize: 25),
+                ),
+              )),
+        ],
+      ),
     );
   }
 }
@@ -125,8 +186,8 @@ class OrderScreenItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      padding: const EdgeInsets.all(12),
+      margin: const EdgeInsets.symmetric(vertical: 3, horizontal: 16),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -145,8 +206,8 @@ class OrderScreenItemWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             child: Image.network(
               product.imageUrl,
-              width: 80,
-              height: 80,
+              width: 95,
+              height: 95,
               fit: BoxFit.cover,
             ),
           ),

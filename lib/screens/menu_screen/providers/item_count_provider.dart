@@ -18,6 +18,13 @@ class OrderProvider extends ChangeNotifier {
   }
 
   int productCount(Product product) => activeOrder.productCount(product);
+
+  void cancel() {
+    activeOrder.cancel();
+    notifyListeners();
+  }
+
   int get totalCount => activeOrder.totalCount;
+
   double get totalCost => activeOrder.totalCost;
 }

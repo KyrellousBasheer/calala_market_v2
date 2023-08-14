@@ -16,6 +16,42 @@ class OrderScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: kMainColor,
         title: const Text("Your Order"),
+        actions: [
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.menu),
+            onSelected: (value) {
+              if (value == "cancel_order") {
+                Provider.of<OrderProvider>(context, listen: false).cancel();
+                Navigator.of(context).pop();
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    // backgroundColor: kMainColor.withOpacity(.3),
+                    content: Text('Order is canceled.'),
+                    behavior: SnackBarBehavior.floating,
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return [
+                const PopupMenuItem<String>(
+                  value: 'cancel_order',
+                  child: Text("Cancel"),
+                ),
+                const PopupMenuItem<String>(
+                  value: 'save_to_add_later',
+                  child: Text('Save to Order later'),
+                ),
+                const PopupMenuItem<String>(
+                  value: 'order_later',
+                  child: Text('Delay order'),
+                ),
+              ];
+            },
+          ),
+        ],
         elevation: 0,
       ),
       body: Padding(
@@ -76,32 +112,52 @@ class TotalOrderInfoWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
             height: kScreenSize!.height / 7,
             decoration: BoxDecoration(
-                color: Colors.greenAccent,
-                borderRadius: BorderRadius.circular(20)),
+              color: kMainColor.withOpacity(.5),
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text("Sub total"),
+                      const Text(
+                        "Sub total",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       Text(
-                          "${Provider.of<OrderProvider>(context).totalCost} EGP"),
+                        "${Provider.of<OrderProvider>(context).totalCost} EGP",
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ]),
                 const Divider(thickness: 2),
                 const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Shipping"),
-                      Text("10 EGP"),
+                      Text(
+                        "Shipping",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "10 EGP",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ]),
                 const Divider(thickness: 2),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text("Total"),
+                      const Text(
+                        "Total",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
                       Text(
-                          "${Provider.of<OrderProvider>(context).totalCost + 10} EGP"),
+                        "${Provider.of<OrderProvider>(context).totalCost + 10} EGP",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ]),
               ],
             ),

@@ -63,4 +63,9 @@ class Order {
     }
     return total;
   }
+
+  void cancel() {
+    productsList.clear();
+    totalCost = 0;
+  }
 }

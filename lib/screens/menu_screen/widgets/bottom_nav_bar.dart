@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MainBottomNavBar extends StatelessWidget {
-  const MainBottomNavBar({
-    super.key,
-  });
+  final int index;
+  const MainBottomNavBar({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +19,14 @@ class MainBottomNavBar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.favorite),
-          label: 'favorites',
+          label: 'Favorites',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
           label: 'Profile',
         ),
       ],
-      currentIndex: 1,
+      currentIndex: index,
       elevation: 0,
       showUnselectedLabels: false,
       backgroundColor: Colors.green,

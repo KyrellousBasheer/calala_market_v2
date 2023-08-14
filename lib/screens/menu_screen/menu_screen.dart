@@ -101,7 +101,7 @@ class MenuScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const MainBottomNavBar(),
+      bottomNavigationBar: const MainBottomNavBar(index: 0),
     );
   }
 }

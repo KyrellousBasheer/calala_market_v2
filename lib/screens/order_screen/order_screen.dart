@@ -42,11 +42,11 @@ class OrderScreen extends StatelessWidget {
                 ),
                 const PopupMenuItem<String>(
                   value: 'save_to_add_later',
-                  child: Text('Save to Order later'),
+                  child: Text('Save to order later'),
                 ),
                 const PopupMenuItem<String>(
                   value: 'order_later',
-                  child: Text('Delay order'),
+                  child: Text('Schedule'),
                 ),
               ];
             },

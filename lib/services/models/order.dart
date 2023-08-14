@@ -33,12 +33,12 @@ class Order {
     int count = 0;
     if (allEntries || entry.value == 1) {
       productsList.removeAt(index);
+      totalCost -= entry.value * product.price;
     } else if (entry.value > 1) {
       count = productsList[index].value - 1;
       productsList[index] = MapEntry(productsList[index].key, count);
+      totalCost -= product.price;
     }
-    // Update totalCost
-    totalCost -= product.price;
     return count;
   }
 

@@ -1,6 +1,7 @@
 import 'package:calala_market/constants.dart';
 import 'package:calala_market/screens/menu_screen/providers/item_count_provider.dart';
 import 'package:calala_market/screens/menu_screen/widgets/search_bar.dart';
+import 'package:calala_market/screens/order_details_screen/product_details_screen.dart';
 import 'package:calala_market/screens/order_screen/order_screen.dart';
 import 'package:calala_market/screens/shared_widgets/add_And_remove_product_to_cart_sidget.dart';
 import 'package:calala_market/screens/shared_widgets/main_drawer.dart';
@@ -200,6 +201,7 @@ class ProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    addedToCart++;
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(7)),
@@ -217,18 +219,31 @@ class ProductWidget extends StatelessWidget {
             flex: 50,
             child: Stack(
               children: [
-                SizedBox(
-                  width: double.infinity,
-                  child: Image.network(
-                    product.imageUrl,
-                    fit: BoxFit.cover,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      ProductDetailsScreen.routeName,
+                      arguments: product,
+                    );
+                  },
+                  child: Hero(
+                    transitionOnUserGestures: true,
+                    tag: product.title,
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Image.network(
+                        product.imageUrl,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
                 Positioned(
                   top: 0,
                   right: 0,
                   child: SmallIconBtn(
-                    icon: (addedToCart % 5 == 0)
+                    icon: (addedToCart % 3 == 0)
                         ? Icons.favorite
                         : Icons.favorite_border,
                     onPressed: () {},

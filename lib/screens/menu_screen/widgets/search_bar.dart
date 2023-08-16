@@ -14,9 +14,7 @@ class SearchField extends StatelessWidget {
       onSubmitted: onSubmitted,
       controller: controller,
       decoration: InputDecoration(
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
         hintText: 'Search for anything...',
         suffixIcon: IconButton(
           onPressed: () {

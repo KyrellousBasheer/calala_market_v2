@@ -60,16 +60,23 @@ class MenuScreen extends StatelessWidget {
                     var totalCount = orderProvider.totalCount;
                     if (totalCount > 0) {
                       return Positioned(
-                        right: 0,
+                        left: 4,
                         top: 0,
                         child: CircleAvatar(
                           radius: 12,
                           backgroundColor: Colors.red,
                           child: Padding(
-                            padding: const EdgeInsets.all(2.0),
+                            padding: const EdgeInsets.all(2.5),
                             child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: Text("$totalCount")),
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                "$totalCount",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       );
@@ -77,10 +84,13 @@ class MenuScreen extends StatelessWidget {
                     return Container();
                   },
                 ),
-                const Center(
-                  child: Icon(
-                    Icons.shopping_cart_outlined,
-                    size: 30,
+                const Positioned(
+                  top: 1,
+                  child: Center(
+                    child: Icon(
+                      Icons.shopping_cart_outlined,
+                      size: 30,
+                    ),
                   ),
                 ),
               ]),

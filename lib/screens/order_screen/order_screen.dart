@@ -1,5 +1,6 @@
 import 'package:calala_market/screens/menu_screen/providers/item_count_provider.dart';
 import 'package:calala_market/screens/shared_widgets/add_And_remove_product_to_cart_sidget.dart';
+import 'package:calala_market/services/api_client.dart';
 import 'package:calala_market/services/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -172,7 +173,9 @@ class TotalOrderInfoWidget extends StatelessWidget {
                     ),
                     padding: const EdgeInsets.all(16.0),
                     backgroundColor: Colors.green),
-                onPressed: () {},
+                onPressed: () {
+                  ApiClient.getCurrentLocation().then((value) => print(value));
+                },
                 child: const Text(
                   "Order now",
                   style: TextStyle(fontSize: 25),

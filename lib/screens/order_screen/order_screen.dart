@@ -199,35 +199,50 @@ class OrderItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-        key: Key(product.id.toString()),
-        onDismissed: (direction) {
-          Provider.of<OrderProvider>(context, listen: false)
-              .removeProduct(product, allEntries: true);
-        },
-        confirmDismiss: (direction) async {
-          return (direction == DismissDirection.startToEnd) ? false : true;
-        },
-        secondaryBackground: Container(
-          color: Colors.redAccent,
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Expanded(child: Container()),
-            const Padding(
-              padding: EdgeInsets.only(right: 10.0),
-              child: Icon(
-                Icons.delete_sweep,
-                size: 30,
-                color: Colors.white,
-              ),
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 3, horizontal: 16),
+      child: Dismissible(
+          key: Key(product.id.toString()),
+          onDismissed: (direction) {
+            Provider.of<OrderProvider>(context, listen: false)
+                .removeProduct(product, allEntries: true);
+          },
+          confirmDismiss: (direction) async {
+            return (direction == DismissDirection.startToEnd) ? false : true;
+          },
+          secondaryBackground: Container(
+            decoration: BoxDecoration(
+              color: Colors.redAccent,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: const Offset(0, 3),
+                ),
+              ],
             ),
-          ]),
-        ),
-        background: Container(),
-        child: OrderScreenItemWidget(
-          product: product,
-          count: count,
-        ));
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(child: Container()),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 20.0),
+                    child: Icon(
+                      Icons.delete_sweep,
+                      size: 30,
+                      color: Colors.white,
+                    ),
+                  ),
+                ]),
+          ),
+          background: Container(),
+          child: OrderScreenItemWidget(
+            product: product,
+            count: count,
+          )),
+    );
   }
 }
 
@@ -245,14 +260,13 @@ class OrderScreenItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 3, horizontal: 16),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
+            color: Colors.grey.withOpacity(0.5),
             spreadRadius: 2,
             blurRadius: 5,
             offset: const Offset(0, 3),

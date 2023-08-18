@@ -85,7 +85,7 @@ class MenuScreen extends StatelessWidget {
                   },
                 ),
                 const Positioned(
-                  top: 1,
+                  top: 15,
                   child: Center(
                     child: Icon(
                       Icons.shopping_cart_outlined,

@@ -1,3 +1,5 @@
+import 'package:calala_market/screens/menu_screen/menu_screen.dart';
+import 'package:calala_market/screens/orders_history_screen/orders_history_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainBottomNavBar extends StatelessWidget {
@@ -14,8 +16,8 @@ class MainBottomNavBar extends StatelessWidget {
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: 'Search',
+          icon: Icon(Icons.article_rounded),
+          label: 'Orders',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.favorite),
@@ -32,7 +34,21 @@ class MainBottomNavBar extends StatelessWidget {
       backgroundColor: Colors.green,
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.white.withOpacity(.4),
-      onTap: (index) {},
+      onTap: (index) {
+        switch (index) {
+          case 0:
+            Navigator.pushReplacementNamed(context, MenuScreen.routeName);
+            break;
+          case 1:
+            Navigator.pushReplacementNamed(
+              context,
+              OrdersHistoryScreen.routeName,
+            );
+            break;
+
+          default:
+        }
+      },
     );
   }
 }

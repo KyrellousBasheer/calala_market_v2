@@ -2,6 +2,7 @@ import 'package:calala_market/screens/menu_screen/menu_screen.dart';
 import 'package:calala_market/screens/menu_screen/providers/item_count_provider.dart';
 import 'package:calala_market/screens/order_details_screen/product_details_screen.dart';
 import 'package:calala_market/screens/order_screen/order_screen.dart';
+import 'package:calala_market/screens/orders_history_screen/orders_history_screen.dart';
 import 'package:calala_market/screens/snake_screen/snake_game_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,10 @@ class MyApp extends StatelessWidget {
           MenuScreen.routeName: (context) => MenuScreen(),
           SnakeGameScreen.routeName: (context) => const SnakeGameScreen(),
           OrderScreen.routeName: (context) => const OrderScreen(),
-          ProductDetailsScreen.routeName: (context) => ProductDetailsScreen()
+          ProductDetailsScreen.routeName: (context) =>
+              const ProductDetailsScreen(),
+          OrdersHistoryScreen.routeName: (context) =>
+              const OrdersHistoryScreen(),
         },
         theme: ThemeData(primaryColor: Colors.green),
       ),
